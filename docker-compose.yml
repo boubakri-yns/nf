@@ -1,0 +1,83 @@
+services:
+  mailpit:
+    image: axllent/mailpit
+    container_name: nexans_mailpit
+    restart: unless-stopped
+    ports:
+      - "1026:1025"
+      - "8026:8025"
+
+  mysql:
+    image: mysql:8.0
+    container_name: nexans_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: nexans_expenses
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: nexans
+      MYSQL_PASSWORD: nexans
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nexans_backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    working_dir: /var/www
+    volumes:
+      - ./backend:/var/www
+      - backend_vendor:/var/www/vendor
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8001
+      PHP_CLI_SERVER_WORKERS: "4"
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: nexans_expenses
+      DB_USERNAME: nexans
+      DB_PASSWORD: nexans
+      FRONTEND_URL: http://localhost:5173
+      SANCTUM_STATEFUL_DOMAINS: localhost:5173,127.0.0.1:5173
+      FILESYSTEM_DISK: public
+    ports:
+      - "8001:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nexans_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    environment:
+      VITE_API_URL: http://localhost:8001/api
+    ports:
+      - "5173:5173"
+
+volumes:
+  mysql_data:
+  backend_vendor:
+  frontend_node_modules:
