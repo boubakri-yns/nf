@@ -1,7 +1,7 @@
 {
-  "name": "nexans/expense-manager-api",
+  "name": "gnf/expense-manager-api",
   "type": "project",
-  "description": "API Laravel 11 - Gestion des notes de frais Nexans",
+  "description": "API Laravel 11 - Gestion des notes de frais GNF",
   "require": {
     "barryvdh/laravel-dompdf": "^3.1.1",
     "php": "^8.2",

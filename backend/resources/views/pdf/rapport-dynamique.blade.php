@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="brand">NEXANS</div>
+        <div class="brand">GNF</div>
         <div><strong>{{ $titre }}</strong></div>
         <div class="meta">
             Genere le {{ $generatedAt->format('Y-m-d H:i') }} |

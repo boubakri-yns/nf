@@ -1,4 +1,4 @@
-# Nexans - Gestion des Notes de Frais
+# GNF - Gestion des Notes de Frais
 
 Monorepo avec:
 - `backend`: API Laravel 11 + Sanctum
@@ -22,9 +22,9 @@ URLs:
 Base de donnees Docker:
 - host: `127.0.0.1`
 - port: `3307`
-- database: `nexans_expenses`
-- user: `nexans`
-- password: `nexans`
+- database: `gnf_expenses`
+- user: `gnf`
+- password: `gnf`
 
 Le backend Docker applique automatiquement:
 - installation Composer si necessaire

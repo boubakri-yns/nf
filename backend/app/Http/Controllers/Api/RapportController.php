@@ -362,7 +362,7 @@ class RapportController extends Controller
         return response()->noContent();
     }
 
-    public function generer(Request $request): JsonResponse|StreamedResponse|BinaryFileResponse
+    public function generer(Request $request): JsonResponse|StreamedResponse|BinaryFileResponse|Response
     {
         $this->authorizeBuilder($request);
 
@@ -724,7 +724,7 @@ class RapportController extends Controller
         return response()->download($path, 'rapport-dynamique-'.now()->format('Ymd-His').'.xlsx')->deleteFileAfterSend(true);
     }
 
-    private function exportPdf(Collection $columns, array $rows, array $summary, array $validated): BinaryFileResponse|JsonResponse
+    private function exportPdf(Collection $columns, array $rows, array $summary, array $validated): Response|JsonResponse
     {
         if (! class_exists(\Barryvdh\DomPDF\Facade\Pdf::class)) {
             return response()->json([

@@ -21,9 +21,9 @@ fi
 set_env_value "DB_CONNECTION" "${DB_CONNECTION:-mysql}"
 set_env_value "DB_HOST" "${DB_HOST:-mysql}"
 set_env_value "DB_PORT" "${DB_PORT:-3306}"
-set_env_value "DB_DATABASE" "${DB_DATABASE:-nexans_expenses}"
-set_env_value "DB_USERNAME" "${DB_USERNAME:-nexans}"
-set_env_value "DB_PASSWORD" "${DB_PASSWORD:-nexans}"
+set_env_value "DB_DATABASE" "${DB_DATABASE:-gnf_expenses}"
+set_env_value "DB_USERNAME" "${DB_USERNAME:-gnf}"
+set_env_value "DB_PASSWORD" "${DB_PASSWORD:-gnf}"
 set_env_value "APP_URL" "${APP_URL:-http://localhost:8001}"
 set_env_value "LOG_CHANNEL" "stderr"
 

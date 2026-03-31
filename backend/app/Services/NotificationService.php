@@ -112,7 +112,7 @@ class NotificationService
         ?string $attachmentName
     ): void {
         $senderEmail = (string) config('services.brevo.sender_email');
-        $senderName = (string) config('services.brevo.sender_name', 'Nexans Notes de Frais');
+        $senderName = (string) config('services.brevo.sender_name', 'GNF Notes de Frais');
 
         if ($senderEmail === '') {
             throw new \RuntimeException('BREVO sender email is missing.');

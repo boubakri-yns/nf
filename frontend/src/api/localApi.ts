@@ -372,7 +372,7 @@ function createInitialState(): MockState {
     {
       id: 1,
       nom: 'Amina Nouvelle',
-      email: 'amina.nouvelle@nexans.com',
+      email: 'amina.nouvelle@gnf.com',
       email_responsable: 'manager1.app@nf.com',
       matricule: 'EMP010',
       departement: 'Industrialisation',
